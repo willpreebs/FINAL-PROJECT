@@ -12,8 +12,8 @@ public class CubeNet extends JPanel
 {
 	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 1000;
-	public final String CUBE_PATH = "E:\\FINAL PROJECT\\Cube Sprites\\Whole Cube (white)5x.png"; //the whole cube
-	//this needs to be changed based on location 
+	public final String CUBE_PATH = "Cube Sprites//Whole Cube (white)5x.png"; //the whole cube
+	//this needs to be changed based on location -- currently for github
 
 	private BufferedImage cubeSkeleton; //whole cube
 	private ArrayList<BufferedImage> imageList;//individual images of the cube faces
