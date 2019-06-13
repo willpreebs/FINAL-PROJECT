@@ -9,7 +9,8 @@ import java.io.IOException;
 
 public class CubeFace extends JPanel
 {
-	private final String CUBE_SPRITES_PATH = "E:\\FINAL PROJECT\\Cube Sprites\\5x Cubies";
+	private final String CUBE_SPRITES_PATH = "Cube Sprites/5x Cubies";
+	//Cube Sprites/5x Cubies/Cut Bottom/Cut Bottom Blue Cubie5x.png
 
 	private int [] coord; //coord should be an array of three ints denoting the simulated 3D coordinates (X, Y, Face#);
 	//Face#s:    Back Left 0, Back Right 1, Left 2, Up 3, Right 4, Down 5
@@ -148,7 +149,7 @@ public class CubeFace extends JPanel
 		String colPath = "";
 		if(type.equals("br") || type.equals("l"))
 		{
-			typPath = "\\Left\\";
+			typPath = "/Left/";
 			if(color.equals("White"))
 			{
 				colPath = "Side White Cubie 2 5x.png";
@@ -177,7 +178,7 @@ public class CubeFace extends JPanel
 		}
 		else if(type.equals("blc"))
 		{
-			typPath = "\\Cut Side Left\\";
+			typPath = "/Cut Side Left/";
 			if(color.equals("White"))
 			{
 				colPath = "Cut Side White 2 5x.png";
@@ -206,7 +207,7 @@ public class CubeFace extends JPanel
 		}
 		else if(type.equals("bl") || type.equals("r"))
 		{
-			typPath = "\\Right\\";
+			typPath = "/Right/";
 			if(color.equals("White"))
 			{
 				colPath = "Side White Cubie5x.png";
@@ -234,7 +235,7 @@ public class CubeFace extends JPanel
 		}
 		else if(type.equals("brc"))
 		{
-			typPath = "\\Cut Side Right\\";
+			typPath = "/Cut Side Right/";
 			if(color.equals("White"))
 			{
 				colPath = "Cut Side White5x.png";
@@ -262,7 +263,7 @@ public class CubeFace extends JPanel
 		}
 		else if(type.equals("u") || type.equals("d"))
 		{
-			typPath = "\\Top\\";
+			typPath = "/Top/";
 			if(color.equals("White"))
 			{
 				colPath = "Top White Cubie5x.png";
@@ -290,7 +291,7 @@ public class CubeFace extends JPanel
 		}
 		else if(type.equals("lm"))
 		{
-			typPath = "\\Middle Left\\";
+			typPath = "/Middle Left/";
 			if(color.equals("White"))
 			{
 				colPath = "Middle White Cubie 2 5x.png";
@@ -318,7 +319,7 @@ public class CubeFace extends JPanel
 		}
 		else if(type.equals("rm"))
 		{
-			typPath = "\\Middle Right\\";
+			typPath = "/Middle Right/";
 			if(color.equals("White"))
 			{
 				colPath = "Middle White Cubie5x.png";
@@ -346,7 +347,7 @@ public class CubeFace extends JPanel
 		}
 		else if(type.equals("dc"))
 		{
-			typPath = "\\Cut Bottom\\";
+			typPath = "/Cut Bottom/";
 			if(color.equals("White"))
 			{
 				colPath = "Cut Bottom White Cubie5x.png";
@@ -374,7 +375,7 @@ public class CubeFace extends JPanel
 		}
 		else if(type.equals("dm"))
 		{
-			typPath = "\\Middle Down\\";
+			typPath = "/Middle Down/";
 			if(color.equals("White"))
 			{
 				colPath = "Middle Down White5x.png";
