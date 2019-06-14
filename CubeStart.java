@@ -32,29 +32,30 @@ public class CubeStart
 		window.setContentPane(gp);
 
 		window.pack();
- 		//these loops build a solved cube(not yet)
+ 		
+		//these loops build a solved cube
 		for(int faceNum = 0; faceNum < 6; faceNum++) //every face
 		{
 			for(int r = 0; r < 3; r++) //every row
 			{
 				for(int c = 0; c < 3; c++)//every column
 				{
-					int[]testCoord = {r,c,faceNum}; //coordinates to be passed in so computer knows what image to put there
+					int[]testCoord = {r,c,faceNum}; //coordinates to be passed in so program knows what image to put there
 					CubeFace cubFac = new CubeFace(testCoord, getInitialColor(faceNum), gp.getType(faceNum, r, c)); /*Constructs a cubeface with each coordinate,
 					the initial color found there, and what type that coordinate will be*/
 					BufferedImage cubFaceIm = cubFac.getImage();
-					gp.addImage(cubFaceIm, cubFac);
+					gp.addImage(cubFaceIm, cubFac); //addImage() method in CubeNet keeps track of the CubeFaces and their respective images in parallel
 				}
 			}
 		}
-		MoveMaker mover = new MoveMaker(gp);
-		KeyListen keyL = new KeyListen(mover);
+		MoveMaker mover = new MoveMaker(gp); //MoveMaker initialized
+		KeyListen keyL = new KeyListen(mover); 
 		JTextField textField = keyL.getTextField();
-		keyL.addKeyListen(textField);
-		window.setVisible(true);
+		keyL.addKeyListen(textField); // KeyListen initialized with passed in MoveMaker and textField
+		window.setVisible(true); //calls paintComponent() the first time, makes everything appear
 	}
 	public static String getInitialColor(int faceNum) //Based on the number face it is located on, the method returns the initial color on that face
-	{
+	{ //this method is only used once at the beginning of the program
 		String ret = "";
 		if(faceNum == 0)
 			ret = "Orange";
@@ -69,6 +70,6 @@ public class CubeStart
 		else if(faceNum == 5)
 			ret = "Yellow";
 		return ret;
-	}
+	} 
 }
 
