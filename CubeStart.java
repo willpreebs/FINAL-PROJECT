@@ -13,6 +13,8 @@ import java.awt.Container;
 	Project: Rubik's cube simulator
 */
 
+//Image Paths may need to be updated based on location
+
 //right middle sprites need to be remade
 //make a new folder for down middle and fill it with new sprites and build framework
 public class CubeStart
