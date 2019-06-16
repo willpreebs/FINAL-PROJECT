@@ -13,6 +13,7 @@ public class MoveMaker
 		cubeN = cubby;
 		cubeList = cubeN.getCubeFaceArr();
 		moveList = new ArrayList<Character>();
+		startTime = LocalTime.now();
 	}
 	public void moveChecker(Character a, boolean add, int i) //a controls what moves happen, "add" tells if that move
 	{//is being added to moveList, and i is to make the random number generation in scramble() easier
@@ -54,7 +55,7 @@ with one button press -- not yet done*/
 		else if(a == '+')
 			fPerm();  (not yet written)*/
 /*Basic face turns of the cube, these are absolutely necessary
-For all of the non-orientating moves, there is also an option to control what moves happen with an int*/
+for all of the non-orientating moves, there is also an option to control what moves happen with an int*/
 		else if(a == 'u' || i == 0)
 			uMove();
 		else if(a == 'U' || i == 1)
@@ -234,6 +235,7 @@ For all of the non-orientating moves, there is also an option to control what mo
 		//^makes the time calculation work
 		System.out.println("Congratulations, you have solved the cube!");
 		System.out.println("Your time is:" + "\t" + hours + ":" + mins + ":" + secs); //needs formatting ¯\_(ツ)_/¯
+		startTime = LocalTime.now();
 	}
 //Ease of use methods:   (totally optional)
 	public void uBPerm() // F2 U L R' F2 L' R U
