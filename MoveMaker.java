@@ -1,12 +1,16 @@
 import java.util.*;
 import java.time.LocalTime;
 
+
+
 public class MoveMaker
 {
 	private CubeNet cubeN;
 	private ArrayList<CubeFace>cubeList;
 	private ArrayList<Character>moveList; //keeps track of moves done for undoing purposes
 	private LocalTime startTime;
+	private boolean usedAlgs;
+	private boolean isScrambled;
 
 	public MoveMaker(CubeNet cubby)
 	{
@@ -14,8 +18,10 @@ public class MoveMaker
 		cubeList = cubeN.getCubeFaceArr();
 		moveList = new ArrayList<Character>();
 		startTime = LocalTime.now();
+		usedAlgs = false;
+		isScrambled = false;
 	}
-	public void moveChecker(Character a, boolean add, int i) //a controls what moves happen, "add" tells if that move
+	public void moveChecker(Character a, boolean add, int i)//a controls what moves happen, "add" tells if that move
 	{//is being added to moveList, and i is to make the random number generation in scramble() easier
 		if(a == '-')
 		{
@@ -24,7 +30,7 @@ public class MoveMaker
 		}
 		else if(a == '`')
 			scramble(30);//change number to have longer or shorter scrambles
-/*Permutation algorithms: completely optional for the cube's functionality, but make it easier to solve by making 15 or so moves
+	/*Permutation algorithms: completely optional for the cube's functionality, but make it easier to solve by making 15 or so moves
 with one button press -- not yet done*/
 		else if(a == '0')
 			uBPerm();
@@ -53,7 +59,7 @@ with one button press -- not yet done*/
 		else if(a == '*')
 			rBPerm();
 		else if(a == '+')
-			fPerm();  (not yet written)*/
+			fPerm(); (not yet written) */
 /*Basic face turns of the cube, these are absolutely necessary
 for all of the non-orientating moves, there is also an option to control what moves happen with an int*/
 		else if(a == 'u' || i == 0)
@@ -92,7 +98,7 @@ for all of the non-orientating moves, there is also an option to control what mo
 			sMove();
 		else if(a == 'S' || i == 17)
 			sMovePrime();
-		else if(a == 'x')    //X, Y, and Z change the orientation of the cube on screen
+		else if(a == 'x')  //X, Y, and Z change the orientation of the cube on screen
 			xOrientation();
 		else if(a == 'X')
 			xOrientationPrime();
@@ -105,9 +111,10 @@ for all of the non-orientating moves, there is also an option to control what mo
 		else if(a == 'Z')
 			zOrientationPrime();
 
+
 		if(add)
 			moveList.add(a); //to keep track for undoing
-		
+	}
 	public void undoLastMove()//passes in the opposite move to the moveChecker, needs fixing
 	{
 		char a = '!'; //just a placeholder
@@ -130,41 +137,42 @@ for all of the non-orientating moves, there is also an option to control what mo
 	    else if(a == 'L')
 	    	moveChecker('l', false, -1);
 	    else if(a == 'd')
-		moveChecker('D', false, -1);
-	    else if(a == 'D')
+			moveChecker('D', false, -1);
+		else if(a == 'D')
 	    	moveChecker('d', false, -1);
 	    else if(a == 'b')
-		moveChecker('B', false, -1);
-	    else if(a == 'B')
+			moveChecker('B', false, -1);
+		else if(a == 'B')
 	    	moveChecker('b', false, -1);
 	    else if(a == 'm')
-	        moveChecker('M', false, -1);
-	    else if(a == 'M')
+			moveChecker('M', false, -1);
+		else if(a == 'M')
 	    	moveChecker('m', false, -1);
 	    else if(a == 'e')
-		moveChecker('E', false, -1);
-	    else if(a == 'E')
-		moveChecker('e', false, -1);
-	    else if(a == 's')
-		moveChecker('S', false, -1);
-	    else if(a == 'S')
-		moveChecker('s', false, -1);
-	    else if(a == 'x')
-	 	moveChecker('X', false, -1);
-	    else if(a == 'X')
-		moveChecker('x', false, -1);
-	    else if(a == 'y')
-		moveChecker('Y', false, -1);
-	    else if(a == 'Y')
-	  	moveChecker('y', false, -1);
-	    else if(a == 'z')
-		moveChecker('Z', false, -1);
-	    else if(a == 'Z')
-		moveChecker('z', false, -1);
+			moveChecker('E', false, -1);
+		else if(a == 'E')
+			moveChecker('e', false, -1);
+		else if(a == 's')
+			moveChecker('S', false, -1);
+		else if(a == 'S')
+			moveChecker('s', false, -1);
+		else if(a == 'x')
+			moveChecker('X', false, -1);
+		else if(a == 'X')
+			moveChecker('x', false, -1);
+		else if(a == 'y')
+			moveChecker('Y', false, -1);
+		else if(a == 'Y')
+			moveChecker('y', false, -1);
+		else if(a == 'z')
+			moveChecker('Z', false, -1);
+		else if(a == 'Z')
+			moveChecker('z', false, -1);
 	//for each of these conditions, it tests what the last move is in the arrayList and effectively undos it
 	}
 	public String setColor(int row, int col, int faceNum, String color)
 	{//Finds the exact cubeFace needed and both returns and sets the color of that cubeFace
+		int count = 0;
 		String ret = "";
 		for(int i = 0; i < cubeList.size(); i++)
 		{
@@ -172,7 +180,7 @@ for all of the non-orientating moves, there is also an option to control what mo
 				{
 					if(col == cubeList.get(i).getCoords(1))
 					{
-						if(faceNum == cubeList.get(i).getCoords(2)) 
+						if(faceNum == cubeList.get(i).getCoords(2))
 						{
 							ret = cubeList.get(i).setColor(color);
 							cubeList.get(i).resetImage();
@@ -184,8 +192,8 @@ for all of the non-orientating moves, there is also an option to control what mo
 		}
 		return ret;
 	}
-	public String getColor(int row, int col, int faceNum) //same as setColor() but just returns the color of the cubeFace
-	{
+	public String getColor(int row, int col, int faceNum)
+	{//same as setColor() but just returns the color of the cubeFace
 		String ret = "";
 		for(int i = 0; i < cubeList.size(); i++)
 		{
@@ -201,7 +209,7 @@ for all of the non-orientating moves, there is also an option to control what mo
 		}
 		return ret;
 	}
-	public void scramble(int moves) //num moves gets passed in, and it generates that many moves
+	public void scramble(int moves)//num moves gets passed in, and it generates that many moves
 	{//int moves is currently set at 30
 		System.out.println("Scramble:");
 		for(int i = 0; i < moves; i++)
@@ -210,34 +218,57 @@ for all of the non-orientating moves, there is also an option to control what mo
 			moveChecker('~', true, rand);
 		}
 		System.out.println("");
-		startTime = LocalTime.now(); //starts timer
+		startTime = LocalTime.now();
+		usedAlgs = false;
+		isScrambled = true;
 	}
 	public void cubeSolved() //if the cube is solved... (already determined)
 	{
-		LocalTime endTime = LocalTime.now(); //gets the time it was solved
-		int secs = endTime.getSecond() - startTime.getSecond(); //calculates seconds
-		int mins = endTime.getMinute() - startTime.getMinute(); //calculates minutes
-		int hours = endTime.getHour() - startTime.getHour(); //calculates hours
-		if(secs < 0)
-		{
-			mins--;
-			secs+=60;
-		}
-		if(mins < 0)
-		{
-			hours--;
-			mins+=60;
-		}
-		if(hours < 0)
-		{
-			hours+=12;
-		}
+		int secs = 0;
+		int hours = 0;
+		int mins = 0;
+
+			LocalTime endTime = LocalTime.now();
+			secs = endTime.getSecond() - startTime.getSecond();
+			mins = endTime.getMinute() - startTime.getMinute();
+			hours = endTime.getHour() - startTime.getHour();
+			if(secs < 0)
+			{
+				mins--;
+				secs+=60;
+			}
+			if(mins < 0)
+			{
+				hours--;
+				mins+=60;
+			}
+			if(hours < 0)
+			{
+				hours+=12;
+			}
 		//^makes the time calculation work
-		System.out.println("Congratulations, you have solved the cube!");
-		System.out.println("Your time is:" + "\t" + hours + ":" + mins + ":" + secs); //needs formatting ¯\_(ツ)_/¯
-		startTime = LocalTime.now();
+		System.out.println("");
+
+		if(!isScrambled)
+		{
+			System.out.println("The cube is now solved");
+		}
+		else
+		{
+			System.out.println("Congratulations, you have solved the cube!");
+			if(!usedAlgs && isScrambled)
+			{
+				System.out.println("\t" + "...And you didn't use built-in algorithms! Nice work");
+			}
+			else
+				System.out.println("\t" + "...But you used the built-in algorithms. Try without them next time!");
+		}
+		System.out.println("Your time is:" + "\t" + hours + ":" + mins + ":" + secs);//needs formatting
+		startTime = LocalTime.now(); //restarts timer
+		usedAlgs = false;
+		isScrambled = false;
 	}
-//Ease of use methods:   (totally optional)
+	//Ease of use methods:   (totally optional)
 	public void uBPerm() // F2 U L R' F2 L' R U
 	{
 		moveChecker('f', false, -1);
@@ -252,6 +283,7 @@ for all of the non-orientating moves, there is also an option to control what mo
 		moveChecker('u', false, -1);
 		moveChecker('f', false, -1);
 		moveChecker('f', false, -1);
+		usedAlgs = true;
 	}
 	public void uAPerm() // F2 U L R' F2 L' R U
 	{
@@ -267,6 +299,7 @@ for all of the non-orientating moves, there is also an option to control what mo
 		moveChecker('U', false, -1);
 		moveChecker('f', false, -1);
 		moveChecker('f', false, -1);
+		usedAlgs = true;
 	}
 	public void aAPerm() // R' F R' B2 R F' R' B2 R2
 	{
@@ -282,6 +315,7 @@ for all of the non-orientating moves, there is also an option to control what mo
 		moveChecker('b', false, -1);
 		moveChecker('r', false, -1);
 		moveChecker('r', false, -1);
+		usedAlgs = true;
 	}
 	public void aBPerm() // x' R2 U2 R D R' U2 R D' R
 	{
@@ -299,6 +333,7 @@ for all of the non-orientating moves, there is also an option to control what mo
 		moveChecker('D', false, -1);
 		moveChecker('r', false, -1);
 		moveChecker('x', false, -1);
+		usedAlgs = true;
 	}
 	public void ePerm() // x' R U' R' D R U R' D' R U R' D R U' R' D'
 	{
@@ -320,12 +355,10 @@ for all of the non-orientating moves, there is also an option to control what mo
 		moveChecker('R', false, -1);
 		moveChecker('D', false, -1);
 		moveChecker('x', false, -1);
+		usedAlgs = true;
 	}
 
-	
-//Beginning of necessary methods for solving it	
-		
-	//orientation moves:
+//Beginning of necessary methods for solving it
 	public void xOrientation()
 	{
 		System.out.print("(");
@@ -374,10 +407,9 @@ for all of the non-orientating moves, there is also an option to control what mo
 		moveChecker('b', false, -1);
 		System.out.print(")Z' ");
 	}
-		
-/*Each of the following single layer moves must get and set the colors of all necessary cubeFaces to simulate a move. It also tests
+	/*Each of the following single layer moves must get and set the colors of all necessary cubeFaces to simulate a move. It also tests
 whether the cube is solved after making the move, and calls repaint() which is overridden by paintcomponent() or something*/
-	
+
 	public void sMove() // Clockwise
 	{
 		String store = getColor(0, 1, 3);
